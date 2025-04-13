@@ -25,7 +25,8 @@ jobs:
   - name: run-unit-tests
     plan:
       - get: nestjs-app
-        trigger: true
+        passed: [build-docker-image]      
+        trigger: false
       - task: run-tests
         privileged: true
         config:

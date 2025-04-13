@@ -43,6 +43,7 @@ fly -t tutorial login -c http://localhost:8080 -u test -p test
 
 fly -t tutorial set-pipeline -p nestjs-pipeline -c push-pipeline.yml
 fly -t tutorial unpause-pipeline -p nestjs-pipeline
+ fly -t tutorial set-pipeline -p nestjs-pipeline -c push-pipeline.yml --load-vars-from secrets.yml
 
 =====================================chekcing
 
