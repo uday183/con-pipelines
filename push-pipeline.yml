@@ -2,7 +2,7 @@ resources:
   - name: nestjs-app
     type: git
     source:
-      uri: https://github.com/uday183/concourse-pipelines.git
+      uri: https://github.com/uday183/con-pipelines.git
       branch: dev
 
   - name: docker-image
