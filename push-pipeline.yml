@@ -35,7 +35,7 @@ jobs:
             type: docker-image
             source:
               repository: node
-              tag: "18"  # You can use the appropriate Node.js version (like 18)
+              tag: "20"  # You can use the appropriate Node.js version (like 18)
           inputs:
             - name: nestjs-app
           run:
@@ -45,7 +45,8 @@ jobs:
               - |
                 cd nestjs-app
                 npm install
-                npm run test
+                      chmod +x ./node_modules/.bin/jest
+                      ./node_modules/.bin/jest
 
   - name: push-docker-image
     plan:

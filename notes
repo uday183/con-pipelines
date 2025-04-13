@@ -1,7 +1,7 @@
 Docker:
 
 # Build the image
-    docker-compose up -d
+docker-compose up -d
 docker-compose down -v --remove-orphans
 docker build -t udaypython/nestjs-app:latest .
 
