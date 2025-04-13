@@ -51,8 +51,8 @@ jobs:
   - name: push-docker-image
     plan:
       - get: nestjs-app
-        trigger: false
         passed: [run-unit-tests]
+        trigger: true
       - put: docker-image
         params:
           build: nestjs-app
