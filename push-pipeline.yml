@@ -1,0 +1,56 @@
+resources:
+  - name: nestjs-app
+    type: git
+    source:
+      uri: https://github.com/uday183/concourse-pipelines.git
+      branch: dev
+
+  - name: docker-image
+    type: docker-image
+    source:
+      repository: udaypython/nestjs-app
+      tag: latest
+      username: ((DOCKER_USERNAME))
+      password: ((DOCKER_PASSWORD))
+
+jobs:
+  - name: build-docker-image
+    plan:
+      - get: nestjs-app
+        trigger: true
+      - put: docker-image
+        params:
+          build: nestjs-app
+
+  - name: run-unit-tests
+    plan:
+      - get: nestjs-app
+        trigger: true
+      - task: run-tests
+        privileged: true
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: node
+              tag: "18"  # You can use the appropriate Node.js version (like 18)
+          inputs:
+            - name: nestjs-app
+          run:
+            path: sh
+            args:
+              - -exc
+              - |
+                cd nestjs-app
+                npm install
+                npm run test
+
+  - name: push-docker-image
+    plan:
+      - get: nestjs-app
+        trigger: false
+        passed: [run-unit-tests]
+      - put: docker-image
+        params:
+          build: nestjs-app

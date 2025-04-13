@@ -1,0 +1,55 @@
+Docker:
+
+# Build the image
+    docker-compose up -d
+docker-compose down -v --remove-orphans
+docker build -t udaypython/nestjs-app:latest .
+
+# Run the container
+docker run -p 3000:3000 nestjs-demo
+
+docker push udaypython/nestjs-app:latest
+
+1.docker build -t udaypython/nestjs-app:latest .
+2.docker images
+3.docker push udaypython/nestjs-app:latest
+docker rmi udaypython/nestjs:latest
+
+docker build -t udaypython/nestjs-app:latest .
+docker login -u udaypython
+docker push udaypython/nestjs-app:latest
+
+fly -t main set-pipeline -p nestjs-pipeline -c push-pipeline.yml --load-vars-from secrets.yml
+fly -t tutorial unpause-pipeline -p nestjs-pipeline
+==================================
+
+# kill ports
+
+netstat -ano | findstr :3000
+taskkill  /PID 3644 /F
+
+==================================
+# docker-compose 
+
+docker-compose down
+docker-compose up -d
+docker ps
+
+==================================
+login::  
+
+fly -t tutorial login -c http://localhost:8080 -u test -p test
+
+
+fly -t tutorial set-pipeline -p nestjs-pipeline -c push-pipeline.yml
+fly -t tutorial unpause-pipeline -p nestjs-pipeline
+
+=====================================chekcing
+
+# GCP.
+
+
+
+
+======================================================
+
