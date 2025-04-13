@@ -8,7 +8,6 @@ docker build -t udaypython/nestjs-app:latest .
 # Run the container
 docker run -p 3000:3000 nestjs-demo
 
-docker push udaypython/nestjs-app:latest
 
 1.docker build -t udaypython/nestjs-app:latest .
 2.docker images
